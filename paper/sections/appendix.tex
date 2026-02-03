@@ -1,26 +1,26 @@
 \section{Camera configurations}
 \label{app:views}
-Table~\ref{tab:configs} lists the camera configurations in the processed set, giving for each the view string from the camera metadata, the sensor column offset of the region of interest, the number of discharges, the spread of $R_{\rm LCFS}$ across the discharges, the Spearman correlation between limb-peak column and $R_{\rm LCFS}$, the scale of the configuration where it could be fitted, and whether the configuration uses its own scale or the pooled campaign scale (Section~\ref{sec:calibration}).
+Table~\ref{tab:configs} lists the camera configurations from the processed set, giving the view string in the camera metadata and the sensor column offset of the region of interest. It also lists the number of discharges, their spread in $R_{\rm LCFS}$, the Spearman correlation of limb peak column and $R_{\rm LCFS}$, and gives the scale at which the configuration can be fitted. It additionally specifies whether the configuration is fitted at its own scale or whether it uses the pooled campaign scale (see Section~\ref{sec:calibration}).
 
 \begin{table}[h]
 \centering
 \scriptsize
 \input{tables/configs}
-\caption{Camera configurations and their calibration, where a configuration uses its own scale when it has at least 8 discharges, at least 3~cm of spread in $R_{\rm LCFS}$, a correlation of the right sign with $|\rho| \ge 0.5$, and a bootstrap interval that excludes zero.}
+\caption{Camera configurations and their calibration. We use the configuration's own scale if it has at least 8 discharges, a spread of at least 3~cm in $R_{\rm LCFS}$, a correlation (of the correct sign) with $|\rho|$ of at least 0.5, and a bootstrap interval that excludes zero.}
 \label{tab:configs}
 \end{table}
 
 \section{Within-shot calibration}
 \label{app:calibration}
-A within-shot regression of the limb-peak column on $R_{\rm LCFS}$ uses the few centimetres of plasma movement during a flat top, and for the \nWithinShot{} discharges in which the LCFS moves by at least 2~cm, the implied scale has a median of \withinScaleMed{}~mm per pixel with an interquartile range of \withinScaleQLo--\withinScaleQHi{} and extremes below 1 and above $10^{\withinScaleMaxLog}$. Three effects produce this spread, since the EFIT boundary is least reliable at the start and end of the flat top, where most of the movement occurs, the brightness profile changes shape as the density rises, which moves the peak at fixed $R_{\rm LCFS}$, and the lever arm is short, so that a 1~cm error in $R_{\rm LCFS}$ changes the slope by tens of percent. The between-shot regression of Section~\ref{sec:calibration} replaces a few centimetres of movement in one discharge with 10--20~cm of position variation across a campaign and is correspondingly more stable.
+The within-shot regression exploits the few centimetres of motion of the plasma during a flat top. For the \nWithinShot{} discharges in our pool in which the LCFS moves by at least 2~cm, we find that the median scale is \withinScaleMed~mm/pixel, with interquartile range \withinScaleQLo--\withinScaleQHi~mm/pixel, with extreme values of $< 1$~mm and $> 10^{\withinScaleMaxLog}$~mm. This large spread may be due to three factors. First, the EFIT boundary measurements are least reliable at the beginning and end of a flat top, at which we get most movement; second, as density increases throughout the flat top, the brightness profile is deformed, causing the peak at a fixed $R_{\rm LCFS}$ to move; finally, the lever arm is small, so a small error of 1~cm in $R_{\rm LCFS}$ causes a large error of tens of percent in our slope. The between-shot regression of Section~\ref{sec:calibration} is much more stable, as we consider the variation of position over a campaign, which is typically 10--20~cm, rather than the few centimetres of intra-discharge motion.
 
 \section{ELM detection}
 \label{app:elm}
-Figure~\ref{fig:elm} shows the $D_\alpha$ trace and the camera frame-mean brightness for an ELMy discharge with the detected spikes, and the camera proxy finds the same events as the $D_\alpha$ monitor where both are available and serves as the only detector where the $D_\alpha$ channel is missing.
+Figure~\ref{fig:elm} shows an ELMy discharge's $D_\alpha$ trace alongside the mean brightness of the camera frame. We also show the spikes detected by the camera, which is able to detect the same events as $D_\alpha$ when the latter are available, and which is our sole detector when the $D_\alpha$ channel is not available.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=\linewidth]{figs/fig_elm.pdf}
-\caption{ELM detection on an ELMy discharge, with the midplane $D_\alpha$ signal and its detected spikes in the top panel, the camera frame-mean brightness and its own spike detection in the bottom panel, and the $\pm 1$~ms exclusion windows as shaded bands.}
+\caption{ELM detection on an ELMy discharge. Upper panel: midplane $D_\alpha$ signal and its detected spikes. Lower panel: mean brightness of the camera frame and its detected spikes. The $\pm 1$~ms exclusion regions for both channels are shown in shading.}
 \label{fig:elm}
 \end{figure}
