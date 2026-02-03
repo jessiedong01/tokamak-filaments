@@ -1,0 +1,22 @@
+\section{Data}
+\label{sec:data}
+
+\paragraph{Archive.}
+FAIR-MAST \citep{jackson2024fairmast} serves the MAST data set as one Zarr store per discharge over HTTP, with a metadata API for discovering signals and shot parameters. The archive covers \nArchiveShots{} discharges. We read six groups from it: the midplane fast camera (\texttt{rbb}), the EFIT equilibrium reconstruction (\texttt{efm}), the summary signals for line-averaged density and Greenwald density (\texttt{esm}), the interferometer (\texttt{ane}), the core and edge Thomson scattering systems (\texttt{ayc}, \texttt{aye}), and the midplane $D_\alpha$ monitor (\texttt{xim}). Plasma current, heating scheme, injected beam power, and the flat-top interval come from the per-shot metadata table.
+
+\paragraph{Camera.}
+The \texttt{rbb} signal is the Photron SA1.1 fast camera (``bullet camera B'') at the HM10 midplane port, which views the outboard edge tangentially \citep{kirk2016filaments, farley2019identification}. In the recording mode we use, the camera reads out a $48 \times 256$ pixel region of its sensor at 100{,}000 frames per second with 10-bit depth; the region offset on the sensor is recorded with each shot. Exposure times are 1--10~$\mu$s, with 4, 7, and 10~$\mu$s the common settings. The metadata view string records the lens, aperture, and filter in use and whether the camera was mounted inverted; the SOL-side detection in Section~\ref{sec:method} makes the pipeline independent of this orientation. Appendix~\ref{app:views} lists the camera configurations.
+
+\paragraph{Selection.}
+\nStripShots{} discharges have a $48 \times 256$ \texttt{rbb} recording. Each recording is a burst at the fast frame rate embedded in a slow record, at 1--2~kHz, of the whole discharge; the burst lasts \burstMedianMs{}~ms in the median (range \burstMinMs--\burstMaxMs{}~ms), and in \nStripTenUs{} recordings its frame interval is 10~$\mu$s. We read the time base of every recording and keep a discharge if its burst overlaps the plasma flat top, extended by 20~ms on each side, by at least 2{,}000 fast frames (\nOkBurst{} discharges), its flat top is defined and at least 50~ms long (\nOkFlatTop), and its peak plasma current is at least \ipCandMin{}~kA (\nOkCurrent). \nShotsCandidates{} discharges satisfy all three. For each we download the burst frames inside the extended flat top; \nShotsFetched{} discharges were downloaded and processed, with a median window of \windowMedianMs{}~ms and \nFramesProcessedM{} million frames in total. \nShotsSlowFps{} of these have a burst frame rate of \slowFpsKhz{}~kHz rather than 100~kHz; we process them but keep them out of the statistics so that the time resolution is uniform. Table~\ref{tab:campaigns} summarizes the processed set by campaign.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\input{tables/campaigns}
+\caption{Processed discharges by campaign. ``In statistics'' counts discharges with at least 50 selected tracks. The scale is the calibration of Section~\ref{sec:calibration} with its 95\% bootstrap interval. $\tilde v_r$ and $\tilde\delta_r$ are the medians over discharges of the per-discharge median radial velocity and width.}
+\label{tab:campaigns}
+\end{table}
+
+\paragraph{Equilibrium and plasma parameters.}
+From EFIT, reconstructed every 5~ms, we take at each time the LCFS boundary contour, $q_{95}$, the plasma current, the magnetic axis position, the vacuum toroidal field at the axis, and the minor radius. The outboard LCFS radius is the largest major radius of the boundary contour within 5~cm of the axis height, which is the quantity the camera limb tracks. Line-averaged density comes from the summary signal where it exists and from the CO$_2$ interferometer summary otherwise; Greenwald fraction uses $n_{\rm GW} = I_p / (\pi a^2)$ with $I_p$ in MA and $a$ the EFIT minor radius. Thomson profiles exist for the later campaigns only; for \nTeMeasured{} of the \nShotsStats{} discharges in the statistics a profile reaches the LCFS during the flat top.

@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage[preprint]{colm2026_conference}
+
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{float}
+\usepackage{xcolor}
+\definecolor{citeblue}{rgb}{0.16, 0.42, 0.73}
+\hypersetup{colorlinks=true, citecolor=citeblue, linkcolor=citeblue, urlcolor=citeblue}
+\usepackage[capitalize,noabbrev]{cleveref}
+
+\input{numbers}
+
+\title{Radial Velocity and Size of Scrape-Off-Layer Filaments\\Across \nShotsStats{} MAST Discharges from 100~kHz Visible Imaging}
+
+\author{Jessie Dong \\
+Stanford University}
+
+\begin{document}
+\maketitle
+\lhead{Preprint.}
+
+\begin{abstract}
+\input{sections/abstract}
+\end{abstract}
+
+\input{sections/intro}
+\input{sections/background}
+\input{sections/data}
+\input{sections/methods}
+\input{sections/results}
+\input{sections/analysis}
+\input{sections/related}
+\input{sections/discussion}
+\input{sections/conclusion}
+
+\section*{Acknowledgements}
+I thank the professors who teach computer vision at Stanford, notably Juan Carlos Niebles, Adrien Gaidon, and Silvio Savarese; their courses led me to the ideas behind this work.
+
+\bibliography{refs}
+\bibliographystyle{colm2026_conference}
+
+\clearpage
+\appendix
+\input{sections/appendix}
+
+\end{document}

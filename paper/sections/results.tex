@@ -1,0 +1,28 @@
+\section{Results}
+\label{sec:results}
+
+
+\subsection{Pixel scale}
+Figure~\ref{fig:calibration} shows the between-shot calibration and Table~\ref{tab:configs} in the appendix lists every camera configuration. Of the \nConfigs{} configurations, \nConfigsOwn{} have enough discharges and enough spread in $R_{\rm LCFS}$ for their own fit, and they cover \nShotsOwnScale{} of the \nShotsProcessed{} processed discharges; the rest use the pooled slope of their campaign. The limb-peak column falls linearly with $R_{\rm LCFS}$ in every fitted configuration, with Spearman correlations between \scaleOwnRhoWeak{} and \scaleOwnRhoStrong{}, and the sign of every slope agrees with the SOL direction found from the images. The fitted scales span \scaleOwnMin{}--\scaleOwnMax{}~mm per pixel. The tightest fit is the M6 configuration ``\scaleCfgCampSixView'' (\scaleCfgCampSixN{} discharges, $\rho = \scaleCfgCampSixRho$), at \scaleCfgCampSix{}~mm per pixel (\scaleCfgCampSixLo--\scaleCfgCampSixHi). The M9 configuration gives \scaleCfgCampNine{}~mm per pixel (\scaleCfgCampNineLo--\scaleCfgCampNineHi). For the same camera, port, and campaign, \citet{farley2019identification} quote a resolution of 5~mm at the tangency plane for wide-angle images reduced to $256 \times 160$ pixels from the camera's $640 \times 448$ mode, which is about 2~mm per native pixel. Our M9 value is of that order, although 2~mm lies below its interval, and the archive does not record whether the lens was the same.
+
+Two features of the calibration limit what the physical units can support. First, the intervals are 10--30\% wide, and a bias common to a configuration, such as a drift of the emission peak relative to the LCFS with density, is not covered by them. Second, in pixel units the filaments look alike in every configuration: across the \nCfgPx{} fitted configurations with at least ten discharges the median track velocity is \vxPxCfgMin{}--\vxPxCfgMax{} pixels per frame and the median width is \fwhmPxCfgMin{}--\fwhmPxCfgMax{} pixels, while the fitted scales differ by a factor of \scaleOwnRatio. The differences between campaigns in Table~\ref{tab:campaigns} are therefore the differences between their calibrations, and we do not interpret them. A scale error multiplies $v_r$ and $\delta_r$ of a configuration by the same factor; it cancels in the velocity--size slopes of Section~\ref{sec:analysis}, which are fitted after normalizing each discharge by its own medians, and it moves a discharge along a diagonal in the regime diagram without changing the conclusions drawn there.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figs/fig_calibration.pdf}
+\caption{Pixel-scale calibration. Each point is one discharge: the median limb-peak column in sensor coordinates over the flat top against the median EFIT outboard LCFS radius. Colours are camera configurations (view string and region-of-interest offset); solid lines are a configuration's own Theil--Sen fit and dashed lines the pooled campaign slope with the configuration's intercept. The scale is the inverse of the slope.}
+\label{fig:calibration}
+\end{figure}
+
+\subsection{Velocity and width distributions}
+\nShotsStats{} discharges have at least 50 selected tracks and enter the statistics, with \nTracksSel{} tracks in total. Figure~\ref{fig:distributions} shows the pooled distributions. The median radial velocity over discharges is \vMedAll{}~m/s (95\% interval \vMedAllLo--\vMedAllHi) and the median radial width is \dMedAll{}~cm (\dMedAllLo--\dMedAllHi). The velocity distribution is skewed, with a tail to 2--3~km/s; the width distribution peaks at 2--3~cm and has a tail to 10~cm. Among all near-edge tracks that pass the quality cuts, \outwardMed\% move outward; the inward-moving remainder is concentrated inboard of the limb peak, where the field-aligned streaks sweep across the strip as they rotate with the plasma. We keep only outward-moving tracks in the velocity--size analysis.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\linewidth]{figs/fig_distributions.pdf}
+\caption{Distributions of radial velocity (left) and radial FWHM (right) of selected tracks, by campaign.}
+\label{fig:distributions}
+\end{figure}
+
+\subsection{Independent velocity estimates}
+Two estimates that do not use the tracking confirm the velocity scale. The cross-correlation lag between the row-averaged fluctuation profiles of consecutive frames inside the near-edge window, with no detection step, gives a per-discharge median velocity of \xcorrVMed{}~m/s over the \nXcorr{} discharges in which more than half the frame pairs have a usable correlation peak. Its ratio to the tracking median is \xcorrRatioMed{} (\xcorrRatioLo--\xcorrRatioHi), and the two correlate across discharges with Spearman $\rho = \xcorrShotRho$. The lag method weights every bright structure in the window, including the slow inboard part of the streaks and the stationary limb, so a ratio below one is expected. Lucas--Kanade flow at the detections correlates with the track velocities within discharges (median per-discharge correlation \lkAgreeMed; $\rho = \lkShotRho$ between discharge medians) but is smaller by a factor of \lkRatioMed. The streaks are elongated and inclined, so the brightness-constancy constraint fixes only the component of motion normal to the streak, and displacements exceed one pixel per frame; both bias the flow magnitude down. We therefore use the flow only as a sign and ordering check.

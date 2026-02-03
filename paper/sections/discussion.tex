@@ -1,0 +1,17 @@
+\section{Limitations}
+\label{sec:discussion}
+
+\paragraph{Calibration.}
+The pixel scale rests on the assumption that the limb peak tracks the EFIT outboard LCFS radius with a fixed offset within a camera configuration. The offset can drift with the emission profile, which depends on density and neutral pressure, and EFIT's boundary carries its own uncertainty of order a centimetre. The bootstrap intervals in Table~\ref{tab:configs} include the scatter these effects produce but not a common bias. The near-uniformity of the filaments in pixel units across configurations whose fitted scales differ by almost a factor of two (Section~\ref{sec:results}) is either a coincidence or a sign that part of the spread in the fitted scales is not optical; we cannot decide this from the archive, and we have therefore drawn no conclusion that depends on comparing physical units between configurations. Every velocity and width in the paper should be read with a systematic uncertainty of 10--30\% in its configuration's scale, and a comparison between configurations with up to a factor of two. A per-shot Calcam model would remove this uncertainty and is the natural next step if the calibration images can be released. Appendix~\ref{app:calibration} shows why the within-shot regression is not a substitute.
+
+\paragraph{Geometry.}
+The strip gives a single row band through the edge. The column axis is close to radial only at the tangency plane, and the width we measure is the chord length of an inclined streak, which overestimates the width perpendicular to the filament by $1/\cos\theta$ with $\theta$ the streak angle to the column axis. We do not correct for this, because the angle is poorly determined in a 48-row strip; the effect inflates $\delta_r$ by a factor that is roughly constant within a campaign and therefore shifts $\hat a$ but not the velocity--size slope. Emission is line-integrated along the view, so a bright structure behind the tangency plane projects to a smaller apparent radius; this blurs the SOL distance but not the velocity, which is a time derivative.
+
+\paragraph{What the camera sees.}
+$D_\alpha$ emission depends on neutral density as well as plasma density, and the neutral density falls steeply inside the LCFS. Filaments are therefore visible mainly in the SOL, and a filament's brightness changes as it moves. Tracking by centroid is robust to a slowly changing amplitude; optical flow is not, which is one reason the flow velocities are low.
+
+\paragraph{Selection.}
+We measure between 10 pixels inboard and 40 pixels outboard of the limb, that is from 3--5~cm inboard to 11--21~cm outboard depending on the configuration, a region that includes filaments at birth. Velocities in the far SOL may differ. The 50-track threshold per discharge and the exclusion of ELM-adjacent tracks remove some discharges and some of the largest events; the headline numbers describe inter-ELM and L-mode filaments near the edge.
+
+\paragraph{Model inputs.}
+$T_e$ at the LCFS is assumed for most discharges, and $n_{e,\rm sep}$ is taken as half the line average. Both enter $a^*$, $v^*$, and $\Lambda$ as power laws with exponents below one, so a factor of two in either moves a discharge by less than a factor of two in the regime diagram. The conclusion that the sample straddles $\hat a = 1$ is robust to this; the value of $\hat v$ is not better than a factor of two.

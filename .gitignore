@@ -1,0 +1,16 @@
+.venv/
+__pycache__/
+*.tmp.npz
+STOP
+# raw frames (28 GB) and large derived files; everything can be rebuilt with the scripts
+data/shots/
+data/shots_meta.parquet
+results/cache/
+results/tracks/
+results/tracks_all.parquet
+results/log_*.txt
+paper/main.log
+paper/*.aux
+paper/*.bbl
+paper/*.blg
+paper/*.out

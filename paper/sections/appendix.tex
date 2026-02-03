@@ -1,0 +1,26 @@
+\section{Camera configurations}
+\label{app:views}
+Table~\ref{tab:configs} lists the camera configurations in the processed set: the view string from the camera metadata, the sensor column offset of the region of interest, the number of discharges, the spread of $R_{\rm LCFS}$ across the discharges, the Spearman correlation between limb-peak column and $R_{\rm LCFS}$, the configuration's own scale where it could be fitted, and whether the configuration uses its own scale or the pooled campaign scale (Section~\ref{sec:calibration}).
+
+\begin{table}[h]
+\centering
+\scriptsize
+\input{tables/configs}
+\caption{Camera configurations and their calibration. A configuration uses its own scale when it has at least 8 discharges, at least 3~cm of spread in $R_{\rm LCFS}$, a correlation of the right sign with $|\rho| \ge 0.5$, and a bootstrap interval that excludes zero.}
+\label{tab:configs}
+\end{table}
+
+\section{Within-shot calibration}
+\label{app:calibration}
+A within-shot regression of the limb-peak column on $R_{\rm LCFS}$ uses the few centimetres of plasma movement during a flat top. For the \nWithinShot{} discharges in which the LCFS moves by at least 2~cm, the implied scale has a median of \withinScaleMed{}~mm per pixel with an interquartile range of \withinScaleQLo--\withinScaleQHi{} and extremes below 1 and above $10^{\withinScaleMaxLog}$. The spread comes from three effects: the EFIT boundary is least reliable at the start and end of the flat top, where most of the movement occurs; the brightness profile changes shape as the density rises, which moves the peak at fixed $R_{\rm LCFS}$; and the lever arm is short, so a 1~cm error in $R_{\rm LCFS}$ changes the slope by tens of percent. The between-shot regression of Section~\ref{sec:calibration} replaces a few centimetres of movement in one discharge with 10--20~cm of position variation across a campaign and is correspondingly more stable.
+
+\section{ELM detection}
+\label{app:elm}
+Figure~\ref{fig:elm} shows the $D_\alpha$ trace and the camera frame-mean brightness for an ELMy discharge, with the detected spikes. The camera proxy finds the same events as the $D_\alpha$ monitor where both are available and serves as the only detector where the $D_\alpha$ channel is missing.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=\linewidth]{figs/fig_elm.pdf}
+\caption{ELM detection on an ELMy discharge. Top: midplane $D_\alpha$ with detected spikes marked. Bottom: camera frame-mean brightness with its own spike detection. The shaded bands are the $\pm 1$~ms exclusion windows.}
+\label{fig:elm}
+\end{figure}
